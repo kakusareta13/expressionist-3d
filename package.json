@@ -1,0 +1,16 @@
+{
+  "name": "expressionist-3d",
+  "version": "1.0.0",
+  "description": "Expressionist 3D animation in the browser: crooked Caligari sets, Van Gogh swirl brushwork, cartoon characters, a moving camera — rendered to video with headless Chrome.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "demo": "node tools/render.mjs examples/room-test --fps 30 --out out/room-test.mp4",
+    "cast": "node tools/render.mjs examples/enfield --q sheet=a --still 0 --out out/cast",
+    "enfield:short": "node tools/render.mjs examples/enfield --q \"vert=1&clip=0:40.6\" --size 1080x1920 --out out/enfield-short.mp4"
+  },
+  "dependencies": {
+    "three": "0.170.0",
+    "playwright-core": "1.63.0"
+  }
+}
