@@ -213,6 +213,7 @@ const SENT = (() => { const out = []; let cur = []; WORDS.forEach((w, i) => { cu
 const sentOf = new Map(); SENT.forEach((s, k) => s.forEach(i => sentOf.set(i, k)));
 let lastW = -1;
 function captions(t, beat) {
+  if (!VERT) { BIG.style.display = "none"; return; }   // long videos: no subtitles, only hints (tags, titles, stamps)
   let wi = -1; for (let i = Math.max(0, lastW - 3); i < WORDS.length; i++) { if (WORDS[i][1] > t) break; if (t < WORDS[i][2] + .25) wi = i; } if (wi < 0) { for (let i = 0; i < WORDS.length; i++) if (WORDS[i][1] <= t && t < WORDS[i][2] + .25) wi = i; }
   if (wi >= 0) { lastW = wi; const w = WORDS[wi][0].replace(/[«»"“”.,!?:;…()]/g, '').toUpperCase(); if (BIG.dataset.w !== String(wi)) { BIG.dataset.w = String(wi); BIG.textContent = w; if (VERT) BIG.style.fontSize = Math.round(Math.min(118, 980 / Math.max(4, w.length * .8))) + 'px'; } const age = t - WORDS[wi][1]; BIG.style.transform = `scale(${1 + .16 * Math.max(0, 1 - age * 7)})`; BIG.style.opacity = 1;
     const s = SENT[sentOf.get(wi)]; let a = s[0], b = s[s.length - 1]; if (b - a > 13) { a = Math.max(s[0], wi - 6); b = Math.min(s[s.length - 1], a + 12); }
